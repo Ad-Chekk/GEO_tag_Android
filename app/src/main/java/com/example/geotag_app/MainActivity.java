@@ -101,31 +101,123 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+
+
+
+
+
+
     private Bitmap addGeoTagToImage(Bitmap originalBitmap) {
+        // Create a mutable copy of the bitmap
         Bitmap mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         Canvas canvas = new Canvas(mutableBitmap);
-        Paint grayBoxPaint = new Paint();
-        grayBoxPaint.setColor(Color.GRAY);
-        grayBoxPaint.setAlpha(200);
 
-        int boxHeight = 150;
-        canvas.drawRect(0, mutableBitmap.getHeight() - boxHeight,
-                mutableBitmap.getWidth() / 2, mutableBitmap.getHeight(), grayBoxPaint);
+        // Calculate dimensions for the semi-transparent box
+        int boxWidth = mutableBitmap.getWidth() / 2;  // Half of image width
+        int boxHeight = mutableBitmap.getHeight() / 3; // One-third of image height
+        int boxY = mutableBitmap.getHeight() - boxHeight;
 
+        // Create semi-transparent gray box
+        Paint boxPaint = new Paint();
+        boxPaint.setColor(Color.GRAY);
+        boxPaint.setAlpha(128); // 50% transparency
+        canvas.drawRect(0, boxY, boxWidth, mutableBitmap.getHeight(), boxPaint);
+
+        // Configure text paint with smaller size
         Paint textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
-        textPaint.setTextSize(30);
+        textPaint.setTextSize(boxHeight / 10); // Reduced text size
+        textPaint.setAntiAlias(true);
+        textPaint.setTextAlign(Paint.Align.LEFT);
 
-        String locationText = String.format(
-                "Lat: %s, Lon: %s\nNote: %s\nTime: %s",
-                editLatitude.getText().toString(),
-                editLongitude.getText().toString(),
-                editNote.getText().toString(),
-                new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
-        );
+        // Calculate text positioning
+        float lineHeight = textPaint.getTextSize() + 6; // Reduced line spacing
+        float textX = 10; // Moved text more to the left
+        float textY = boxY + lineHeight; // Start from top of box
 
-        canvas.drawText(locationText, 10, mutableBitmap.getHeight() - boxHeight + 40, textPaint);
+        // Get note text before creating text lines
+        String noteText = editNote.getText().toString().trim();
+        if (noteText.isEmpty()) {
+            noteText = ""; // Set empty string if no note is entered
+        }
+
+        // Draw each line of text with proper formatting
+        String[] textLines = {
+                String.format("Latitude: %s", editLatitude.getText().toString()),
+                String.format("Longitude: %s", editLongitude.getText().toString()),
+                String.format("Altitude: %s m", editAltitude.getText().toString()),
+                String.format("Accuracy: %s m", editAccuracy.getText().toString()),
+                String.format("Time: %s", new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(new Date())),
+                String.format("Note: %s", noteText)
+        };
+
+        // Draw text with proper wrapping to stay within gray box
+        for (String line : textLines) {
+            if (line.startsWith("Note: ")) {
+                // Handle note text wrapping
+                String noteContent = line.substring(6); // Remove "Note: " prefix
+                String wrappedNote = wrapText(noteContent, textPaint, boxWidth - 20); // 20px padding
+
+                // Draw "Note: " prefix
+                canvas.drawText("Note:", textX, textY, textPaint);
+
+                if (!noteContent.isEmpty()) {
+                    textY += lineHeight;
+                    String[] noteLines = wrappedNote.split("\n");
+                    for (String noteLine : noteLines) {
+                        canvas.drawText(noteLine, textX + 20, textY, textPaint); // Indent wrapped lines
+                        textY += lineHeight;
+                    }
+                }
+            } else {
+                // Draw other lines normally
+                canvas.drawText(line, textX, textY, textPaint);
+                textY += lineHeight;
+            }
+        }
+
         return mutableBitmap;
+    }
+
+    // Helper method to wrap text within the box width (unchanged)
+    private String wrapText(String text, Paint paint, float maxWidth) {
+        String[] words = text.split("\\s");
+        StringBuilder wrapped = new StringBuilder();
+        StringBuilder line = new StringBuilder();
+
+        for (String word : words) {
+            float testWidth = paint.measureText(line + " " + word);
+            if (testWidth <= maxWidth) {
+                if (line.length() > 0) {
+                    line.append(" ");
+                }
+                line.append(word);
+            } else {
+                if (wrapped.length() > 0) {
+                    wrapped.append("\n");
+                }
+                wrapped.append(line);
+                line = new StringBuilder(word);
+            }
+        }
+
+        // Add the last line
+        if (line.length() > 0) {
+            if (wrapped.length() > 0) {
+                wrapped.append("\n");
+            }
+            wrapped.append(line);
+        }
+
+        return wrapped.toString();
+    }
+
+    // Add this helper method to format numbers nicely
+    private String formatNumber(double number) {
+        return String.format(Locale.US, "%.6f", number);
     }
 
     private void checkPermissions() {
