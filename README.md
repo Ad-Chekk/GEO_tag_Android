@@ -26,7 +26,7 @@ Capture Location	Take Photo	Geo-tagged Image
 sh
 Copy
 Edit
-git clone https://github.com/yourusername/GeoTag-App.git
+git clone https://github.com/Ad-Chekk/GEO_tag_Android.git
 cd GeoTag-App
 2️⃣ Open in Android Studio
 Open Android Studio → Select "Open an Existing Project"
