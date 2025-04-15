@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Features
+##  Features
 
 - 📸 **Capture photos** using the device camera  
 - 🌍 **Real-time GPS data** (latitude, longitude, altitude, and accuracy)  
@@ -64,7 +64,7 @@
 
 ---
 
-## 🎯 How It Works
+##  How It Works
 
 1. Tap **Get Location** → Retrieves and displays current GPS coordinates  
 2. Tap **Take Photo** → Launches the camera to capture a picture  
@@ -73,21 +73,21 @@
 
 ---
 
-## 🔮 Future Enhancements
+##  Future Enhancements
 
-- 📀 Save geo-tagged images to the device gallery  
-- 🗘️ Implement a **Map View** to browse photos by location  
-- 📶 Add **offline mode** for location caching  
-- 📤 Share geo-tagged images directly to social media platforms  
+-  Save geo-tagged images to the device gallery  
+-  Implement a **Map View** to browse photos by location  
+-  Add **offline mode** for location caching  
+-  Share geo-tagged images directly to social media platforms  
 
 ---
 
-## 🤝 Contribute
+##  Contribute
 
 Found a bug or have a cool feature in mind?  
 We welcome all contributions!  
-- 🥾 Report issues via GitHub  
-- 🚀 Submit pull requests  
+-  Report issues via GitHub  
+-  Submit pull requests  
 
 If you find this project helpful, don’t forget to **⭐ star** the repo!
 
@@ -95,6 +95,6 @@ If you find this project helpful, don’t forget to **⭐ star** the repo!
 
 ## 📬 Contact
 
-Made with ❤️ by [Aditya Anshuman Chekkala](https://github.com/Ad-Chekk)  
+Made by [Aditya Anshuman Chekkala](https://github.com/Ad-Chekk)  
 Feel free to reach out with questions or suggestions!
 
