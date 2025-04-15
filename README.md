@@ -33,9 +33,12 @@
 
 | Get Location | Take Photo | Geo-tagged Image |
 |--------------|------------|------------------|
-| ![get_location](screenshots/get_location.png) | ![take_photo](screenshots/take_photo.png) | ![geo_tagged_image](screenshots/geo_tagged_image.png) |
+|![WhatsApp Image 2025-04-15 at 18 13 44_c21f8719](https://github.com/user-attachments/assets/2428e94d-62e5-495e-b2b2-e2774d841a61)
+ |![WhatsApp Image 2025-04-15 at 18 13 40_f625e01c](https://github.com/user-attachments/assets/b273034c-b329-4270-9ca8-0e5c9f776964)
+ | ![WhatsApp Image 2025-04-15 at 18 16 47_ab8d0f09](https://github.com/user-attachments/assets/7d31a112-9259-4b67-a868-bfd335fdc1b0)
+|
 
-> 📝 *Place your screenshots in a `screenshots/` folder inside the repo*
+
 
 ---
 
